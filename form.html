@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="head">
+        STUDENT FORM
+    </h1>
+    <center>
+        <div class="form_container">
+            <form class="form" onsubmit="update(event)">
+                <table class="form_list" border="1">
+                    <tr class="form_item">
+                        <td><b>Name</b></td>
+                        <td><input type="text" id="sname" placeholder="Enter your name"></td>
+                    </tr>
+
+                    <tr class="form_item">
+                        <td><b>Age</b></td>
+                        <td><input type="number" id="age" placeholder="Enter your Age"></td>
+                    </tr>
+                    <tr class="form_item">
+                        <td><b>Gender</b></td>
+                        <td style="text-align: left; height: 5px;padding: 10px;" id="gender"><input type="radio"
+                                name="GENDER" class="Gender" value="Male" id="male">
+                            <label for="male">Male</label>
+                            <input name="GENDER" type="radio" class="Gender" value="Female" id="female">
+                            <label for="female">FeMale</label>
+                        </td>
+                    </tr>
+
+                    <tr class="form_item">
+                        <td><b>Course</b></td>
+                        <td><select name="" id="Course_name">
+                                <option value="Javascript">Javascript</option>
+                                <option value="python">python</option>
+                                <option value="java">Java</option>
+                            </select></td>
+                    </tr>
+
+                    <tr class="form_item">
+                        <td><b>E-mail</b></td>
+                        <td><input type="email" id="email" placeholder="Enter Your Email"></td>
+                    </tr>
+
+                    <tr class="form_item">
+                        <td colspan="2">
+                            <button type="submit" style="width: 400px ;padding: 8px;height: 100%;"
+                                class="submitbtn">Save</button>
+
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+
+        </div>
+
+        <table id="register" border="1">
+            <thead class="register_head">
+
+                <tr>
+                    <th>NAME</th>
+                    <th>AGE</th>
+                    <th>COURSE</th>
+                    <th>GENDER</th>
+                    <th>EMAIL</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+        </table>
+    </center>
+
+    <script>
+
+
+        function reg_del(button) {
+            button.closest('tr').remove()
+        }
+
+
+
+        function update(event) {
+
+            event.preventDefault();
+             //Get input values correctly
+            var stu_name = document.getElementById("sname").value;
+            var stu_age = document.getElementById("age").value;
+            var stu_gender = document.querySelector("input[name='GENDER']:checked");
+            var stu_course = document.getElementById("Course_name").value;
+            var stu_email = document.getElementById("email").value;
+
+            if (!stu_gender) {
+                alert("Please select a gender!");
+                return;
+            }
+
+            //  Get the table body
+            var table = document.getElementById("register").getElementsByTagName("tbody")[0];
+
+            // Create a new row
+            var newRow = table.insertRow();
+
+            //  Corrected row structure with proper variable names
+            var cell1 = newRow.insertCell(0);
+            cell1.className = "name-cell";
+            var cell2 = newRow.insertCell(1);
+            cell2.className = "name-cell";
+            var cell3 = newRow.insertCell(2);
+            cell3.className = "name-cell";
+            var cell4 = newRow.insertCell(3);
+            cell4.className = "name-cell";
+            var cell5 = newRow.insertCell(4);
+            cell5.className = "name-cell1";
+            var cell6 = newRow.insertCell(5);
+            cell6.className = "name-cell";
+
+            cell1.textContent = stu_name;
+            cell2.textContent = Number(stu_age);
+            cell3.textContent = stu_course;
+            cell4.textContent = stu_gender.value;
+            cell5.innerHTML = stu_email;
+            cell6.innerHTML = '<button onclick="reg_del(this)" class="register_body_del"  >DELETE</button>'
+
+            //  Clear input fields after saving
+            document.getElementById("sname").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("Course_name").value = "";
+            document.getElementById("Email").value = "";
+
+            // Uncheck gender radio buttons
+           document.querySelector(".male").checked = false;
+            document.querySelector(".female").checked = false;
+
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>
